@@ -1,18 +1,20 @@
-variable "name" {
+variable "app_name" {
   default = "mary"
 }
 
-resource "random_id" "random" {
-  keepers {
-    uuid = "${uuid()}"
-  }
-  byte_length = 12
+variable "provider_token" {
+
 }
 
-output "random" {
-  value = "${random_id.random.hex}"
+module "instance" {
+  count  = 2
+  token  = "${var.provider_token}"
+  region = "nyc"
+  image  = "ubuntu-14-04-x64"
+  source = "./modules/instance"
+  name   = "${var.app_name}"
 }
 
-output "hello_world" {
-  value = "Hello, ${var.name}"
+output "instance_ids" {
+  value = "${module.instance.ids}"
 }
