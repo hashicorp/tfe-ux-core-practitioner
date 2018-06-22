@@ -11,7 +11,7 @@ module "instance" {
   source  = "app.terraform.io/tfe-core-practitioner/instance/cloud"
   version = "0.0.01"
 
-  count  = 2
+  count  = 3
   token  = "${var.provider_token}"
   region = "nyc"
   image  = "ubuntu-14-04-x64"
